@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up NFS &mdash; RHINO 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="RHINO 0.1 documentation" href="index.html"/>
+        <link rel="prev" title="Welcome to RHINO CALF’s documentation!" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> RHINO
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up NFS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#host-pc">Host PC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rhino">RHINO</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RHINO</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Setting up NFS</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/setting_up_nfs.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-nfs">
+<h1>Setting up NFS<a class="headerlink" href="#setting-up-nfs" title="Permalink to this headline">¶</a></h1>
+<p>Instructions on how to set up a network file system (NFS) for RHINO.</p>
+<p>Using an NFS eases RHINO development, moving files onto the RHINO is as simple as dragging and dropping into a shared directory.</p>
+<p><em>The following steps assume default values, set up in [prepping the rhino].</em></p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">set up link to “prepping the rhino”</p>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<p>RHINO &lt;—usb cable—&gt;HOST PC</p>
+<div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">point to “prepping the rhino/console”</p>
+</div>
+</div>
+<div class="section" id="host-pc">
+<h2>Host PC<a class="headerlink" href="#host-pc" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Install NFS server</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>$ sudo apt-get install nfs-kernel-server
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li>Create NFS directory</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>$ sudo mkdir /opt/rhinofs
+$ sudo chmod <span class="m">777</span> /opt/rhinofs
+</pre></div>
+</div>
+<div class="admonition-todo admonition" id="index-2">
+<p class="first admonition-title">Todo</p>
+<p class="last">need to recursively change permissions of /opt/rhinofs</p>
+</div>
+<ol class="arabic simple" start="3">
+<li>Point NFS server to RHINO filesystem</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>$ sudo chmod <span class="m">666</span> /etc/exports
+$ sudo <span class="nb">echo</span> <span class="s2">&quot;/opt/rhinofs       *(rw,nohide,insecure,no_subtree_check,async,no_root_squash)&quot;</span> &gt;&gt; /etc/exports
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Download the <a class="reference external" href="https://github.com/SDRG-UCT/uct-rhino/raw/master/filesystem/rhinofs.tar.gz">RHINO-filesystem</a></li>
+</ol>
+<div class="admonition-todo admonition" id="index-3">
+<p class="first admonition-title">Todo</p>
+<p class="last">investigate problems when trying to download + extract using wget/curl</p>
+</div>
+<ol class="arabic simple" start="5">
+<li>Extract the filesystem into the NFS directory</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>$ sudo tar -xf rhinofs.tar.gz -C /opt/rhinofs
+</pre></div>
+</div>
+<ol class="arabic simple" start="6">
+<li>Start NFS server</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>$ sudo service nfs-kernel-server start
+</pre></div>
+</div>
+</div>
+<div class="section" id="rhino">
+<h2>RHINO<a class="headerlink" href="#rhino" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Power on RHINO and interrupt autoboot by pressing any key</li>
+<li>(optional) Set NFS as default boot mode</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>RHINO <span class="c1"># setenv run nfsboot</span>
+RHINO <span class="c1"># saveenv</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li>Boot from NFS</li>
+</ol>
+<div class="highlight-sh"><div class="highlight"><pre><span></span>RHINO <span class="c1"># run nfsboot</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li>Wait for a new SSH key to be generated</li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to RHINO CALF’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Brad Kahn.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
